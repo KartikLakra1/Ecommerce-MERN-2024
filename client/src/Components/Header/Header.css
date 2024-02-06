@@ -1,0 +1,241 @@
+.navigation-main{
+    height: 10vh;
+    /* width: fit-content; */
+    background-image: linear-gradient(to right , #fdcbf1 , #e6dee9);
+    box-shadow: 4px 4px black;
+    position: relative;
+}
+
+.main-header{
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: linear-gradient(to right , #fdcbf1 , #e6dee9);
+    padding: 0 2rem;
+    z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.link-color{
+    text-decoration: none;
+    color: #000;
+    border: none;
+}
+
+.link-color-toggle{
+    text-decoration: none;
+    color: #fff;
+    border: none;
+}
+
+ul{
+    list-style: none;
+}
+
+.navlink-list{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    /* flex-direction: column; */
+}
+
+
+.header-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-logo h1{
+    font-weight: 800;
+    color: #000;
+}
+
+.header-profile-navbar{
+    position: absolute;
+    height: auto;
+    min-width: 100px;
+    right: 10px;
+    top: 60px;
+    background-image: linear-gradient(to right, #4e4646,  #000) ;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    gap: 1rem;
+}
+
+.header-category-navbar{
+    position: absolute;
+    height: auto;
+    min-width: 100px;
+    top: 60px;
+    background-image: linear-gradient(to right, #4e4646,  #000) ;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    gap: 1rem;
+}
+
+
+
+.header-profile-navbar-item{
+    cursor:pointer;
+    font-weight: 500;
+    border-bottom: 2px solid #fff;margin-bottom: 5px;
+    width: 100px;
+}
+
+
+.hidden-content{
+    display: none;
+}
+
+.toggle-button{
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    cursor: pointer;
+    z-index: 50;
+}
+
+.cartAndProfile-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cartAndProfile-list li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+@media (max-width : 600px){
+
+    .main-header{
+        display: none;
+    }
+
+
+    .toggle-true{
+    height: 97vh;
+    width: 100%;
+    background-image: linear-gradient(to right , #fdcbf1 , #e6dee9);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 0 2rem;
+    gap: 2rem;
+    z-index: 50;
+    }
+
+    .header-logo .icon-Logo{
+        display: none;
+    }
+
+    .header-logo{
+        font-size: 2.2rem;
+        letter-spacing: 6px;
+        text-shadow: 3px 3px 5px red;
+        text-shadow: 3px 3px -5px white;
+    }
+
+    .navlink-list{
+        width: 70%;
+        display: flex;
+        align-items: left;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        border-bottom: 5px solid black;
+        padding-bottom: 10px;
+        /* flex-direction: column; */
+    }
+
+    .navlink-list li{
+        width: 100%;
+        text-align: left;
+        font-weight: 700;
+    }
+
+    .header-category-navbar{
+        position: relative;
+        margin: 1px;
+        height: auto;
+        min-width: 100px;
+        top: 0;
+        background-image: linear-gradient(to right , #f0b2e2 , #cd81e8);
+        color: #000;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: left;
+        gap: 1rem;
+        border: none;
+    }
+    
+
+
+    .toggle-button{
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 15px;
+    }
+
+    .cartAndProfile-list{
+        width: 50%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .header-profile-navbar{
+        position: relative;
+        margin: 1px;
+        height: auto;
+        min-width: 100px;
+        top: 0;
+        background-image: linear-gradient(to right , #f0b2e2 , #cd81e8);
+        color: #000;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: left;
+        gap: 1rem;
+        border: none;
+    }
+
+
+
+
+
+}
