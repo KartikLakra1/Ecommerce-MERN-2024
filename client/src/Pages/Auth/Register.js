@@ -12,6 +12,7 @@ const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [answer, setAnswer] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
     const navigate = useNavigate()
@@ -86,6 +87,15 @@ const Register = () => {
 
                             <input type="text" className="register-input" value={address}
                                 onChange={(e) => setAddress(e.target.value)}
+                                required />
+
+
+                        </div>
+                        <div className="register-main-form-content">
+                            <label>What is your Favourite Sports</label>
+
+                            <input type="text" className="register-input" value={answer}
+                                onChange={(e) => setAnswer(e.target.value)}
                                 required />
 
 
