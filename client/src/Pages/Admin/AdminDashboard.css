@@ -1,0 +1,40 @@
+.adminDashboard-container{
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    padding: 20px;
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.admin-menu-container{
+    width: 30%;
+}
+
+.content-container{
+    margin: 5px;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.card{
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #000;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+@media (max-width : 600px){
+    .adminDashboard-container{
+        width: 100%;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr ;
+    }
+}
