@@ -7,7 +7,6 @@ import PagenotFound from './Pages/PagenotFound/PagenotFound';
 import Policies from './Pages/Policies/Policies';
 import Register from './Pages/Auth/Register.js';
 import Login from './Pages/Auth/Login.js';
-import Dashboard from './Pages/user/Dashboard.js';
 import PrivateRoute from './Components/Routes/Private.js';
 import ForgotPassword from './Pages/Auth/ForgotPassword.js';
 import AdminRoute from './Components/Routes/AdminRoute.js';
@@ -15,6 +14,9 @@ import AdminDashboard from './Pages/Admin/AdminDashboard.js';
 import CreateCategory from './Pages/Admin/CreateCategory.js';
 import CreateProduct from './Pages/Admin/CreateProduct.js';
 import User from './Pages/Admin/User.js';
+import UserDashboard from './Pages/user/UserDashboard.js';
+import Orders from './Pages/user/Orders.js';
+import Profile from './Pages/user/Profile.js';
 
 function App() {
   return (
@@ -31,8 +33,11 @@ function App() {
 
 
         <Route path='/dashboard' element={<PrivateRoute />}>
-          <Route path="user" element={<Dashboard />} />
+          <Route path="user" element={<UserDashboard />} />
+          <Route path="user/orders" element={<Orders />} />
+          <Route path="user/profile" element={<Profile />} />
         </Route>
+
 
         <Route path='/dashboard' element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
