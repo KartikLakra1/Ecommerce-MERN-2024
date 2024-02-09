@@ -4,6 +4,7 @@ import express from "express";
 import colors from "colors";
 import connectToDb from './config/db.js';
 import morgan from 'morgan';
+import categoryRoutes from './routes/categoryRoutes.js';
 import authRoutes from './routes/authRoutes.js'
 import cors from 'cors'
 
@@ -21,6 +22,7 @@ connectToDb();
 
 // routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/category", categoryRoutes);
 
 
 // rest api
