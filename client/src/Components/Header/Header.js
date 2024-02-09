@@ -10,6 +10,7 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useAuth } from "../../Context/Auth";
 
+
 const Header = () => {
 
     const [click, setClick] = useState(false);
@@ -86,10 +87,46 @@ const Header = () => {
                         {0}</li>
 
 
-                    <li><CgProfile size={30} style={{ cursor: 'pointer' }} onClick={handleProfile} />
+                    <li>
+                        {
+                            !auth.user ? (< CgProfile size={30} style={{ cursor: 'pointer' }} onClick={handleProfile} />)
+                                :
+                                (
+                                    <div className="username">
+                                        <h1 style={{ cursor: 'pointer' }} onClick={handleProfile} >
+                                            {
+                                                auth?.user?.name
+                                            }
+                                        </h1>
+
+                                        <span style={{ cursor: 'pointer' }} onClick={handleProfile}>
+                                            {
+                                                profile ? (
+                                                    <MdOutlineKeyboardArrowUp size={15} />) : (<IoIosArrowDown size={15} />)
+                                            }
+                                        </span>
+
+
+                                    </div>
+
+
+
+
+                                )
+                        }
+
                         <div className={profile ? ("header-profile-navbar") : ("hidden-content")}>
                             {
-                                !auth.user ? (<p className="header-profile-navbar-item"><Link to={"/login"} className="link-color-toggle">Login</Link></p>) : (<p className="header-profile-navbar-item"><Link to={"/login"} className="link-color-toggle" onClick={handleLogout}>Logout</Link></p>)
+                                !auth.user ? (<p className="header-profile-navbar-item"><Link to={"/login"} className="link-color-toggle">Login</Link></p>) :
+
+                                    (<div>
+
+                                        <p className="header-profile-navbar-item"><Link to={"/login"} className="link-color-toggle" onClick={handleLogout}>Logout</Link></p>
+
+                                        <p className="header-profile-navbar-item"><Link to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} className="link-color-toggle" >Dashboard</Link></p>
+                                    </div>
+
+                                    )
                             }
 
                             <p className="header-profile-navbar-item">New Products</p>

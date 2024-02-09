@@ -21,6 +21,20 @@
     left: 0;
 }
 
+.username{
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border: 1px solid black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2px;
+    border-radius: 10px;
+    background-color: #fff;
+    font-weight: 600;
+}
+
 .link-color{
     text-decoration: none;
     color: #000;
@@ -232,6 +246,20 @@ a{
         text-align: left;
         gap: 1rem;
         border: none;
+    }
+
+    .username{
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        border: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 2px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.05);
+        font-weight: 600;
     }
 
 
