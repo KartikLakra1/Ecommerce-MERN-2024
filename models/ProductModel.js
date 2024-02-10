@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
     },
     slug: {
         type: String,
+        required: true,
     },
     description: {
         type: String,
@@ -35,3 +36,4 @@ const productSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 export default mongoose.model("Products", productSchema);
+

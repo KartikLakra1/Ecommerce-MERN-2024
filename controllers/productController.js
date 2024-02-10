@@ -10,27 +10,27 @@ export const createProductController = async (req, res) => {
         // Validation
         switch (true) {
             case !name:
-                return res.status(500).send({ message: "Name is required" });
+                return res.status(500).send({ error: "Name is required" });
 
             case !description:
-                return res.status(500).send({ message: "description is required" });
+                return res.status(500).send({ error: "description is required" });
 
             case !price:
-                return res.status(500).send({ message: "price is required" });
+                return res.status(500).send({ error: "price is required" });
 
             case !category:
-                return res.status(500).send({ message: "category is required" });
+                return res.status(500).send({ error: "category is required" });
 
             case !quantity:
-                return res.status(500).send({ message: "Qunatity is required" });
+                return res.status(500).send({ error: "Qunatity is required" });
 
             case photo && photo.size > 1000000:
-                return res.status(500).send({ message: "Photo is required and should be less than 1mb" });
+                return res.status(500).send({ error: "Photo is required and should be less than 1mb" });
 
 
         }
 
-        const products = await ProductModel.findOne({ ...req.fields, slug: slugify(name) });
+        const products = new ProductModel({ ...req.fields, slug: slugify(name) });
 
         if (photo) {
             products.photo.data = fs.readFileSync(photo.path);
