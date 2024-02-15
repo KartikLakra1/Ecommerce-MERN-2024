@@ -21,3 +21,8 @@
   color: #fff;
   background-color: #000;
 }
+
+tr {
+  border-bottom: 1px solid #000;
+}
+

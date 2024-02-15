@@ -9,9 +9,9 @@ const AdminDashboard = () => {
     return (
         <Layout>
             <div className="adminDashboard-container">
-                <div className="admin-menu-container">
-                    <AdminMenu />
-                </div>
+
+                <AdminMenu />
+
 
                 <div className="content-container">
                     <div className="card">

@@ -45,18 +45,18 @@ const Header = () => {
 
 
                 <div className="header-logo">
-                    <IoLogoIonitron className="icon-Logo" size={30} />
-                    <h1><NavLink className="link-color" to={"/"}>Dante</NavLink></h1>
+                    <IoLogoIonitron className="icon-Logo" size={50} />
+                    <h1><NavLink className="link-color-toggle" to={"/"}>Dante</NavLink></h1>
                 </div>
 
 
                 <ul className="navlink-list">
-                    <li><NavLink className="link-color" to={"/"}>HOME</NavLink></li>
+                    <li><NavLink className="link-color-toggle" to={"/"}>HOME</NavLink></li>
 
 
                     <li>
                         <div>
-                            <NavLink className="link-color" to={"/category"}>CATEGORY</NavLink>
+                            <NavLink className="link-color-toggle" to={"/category"}>CATEGORY</NavLink>
 
                             <span style={{ cursor: 'pointer' }} onClick={handleClick}>
                                 {
@@ -75,13 +75,13 @@ const Header = () => {
                     </li>
 
 
-                    <li><NavLink className="link-color" to={"/about"}>ABOUT</NavLink></li>
+                    <li><NavLink className="link-color-toggle" to={"/about"}>ABOUT</NavLink></li>
 
                 </ul>
 
 
                 <ul className="cartAndProfile-list">
-                    <li><NavLink className="link-color" to={"/cart"}>
+                    <li><NavLink className="link-color-toggle" to={"/cart"}>
                         <CiShoppingCart size={30} />
                     </NavLink>
                         {0}</li>
@@ -143,9 +143,9 @@ const Header = () => {
             <div className="toggle-button" onClick={handleToggle}>
                 {
                     toggle ? (
-                        <GiCrossMark style={{ color: "#000" }} size={30} />
+                        <GiCrossMark style={{ color: "#fff" }} size={30} />
                     ) : (
-                        <GiHamburgerMenu style={{ color: "#000" }} size={30} />
+                        <GiHamburgerMenu style={{ color: "#fff" }} size={30} />
                     )
                 }
             </div>
