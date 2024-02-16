@@ -3,12 +3,14 @@ import Layout from "../../Components/Layout/Layout";
 import AdminMenu from "../../Components/Layout/AdminMenu";
 import axios from 'axios';
 import CategoryForm from "../../Components/Form/CategoryForm";
+import { useAuth } from "../../Context/Auth";
 
 
 const CreateCategory = () => {
     const [categories, setCategories] = useState([]);
     const [visible, setvisible] = useState(false);
     const [name, setName] = useState("");
+    const [auth, setAuth] = useAuth()
 
 
     const handleVisibility = () => {
@@ -20,10 +22,15 @@ const CreateCategory = () => {
         e.preventDefault();
 
         try {
-            const { data } = await axios.post('/api/v1/category/create-category', { name });
+            const { data } = await axios.post('/api/v1/category/create-category', { name }, {
+                headers: {
+                    "Authorization": auth?.token
+                }
+            });
             if (data?.success) {
                 alert(`${name} is created`)
                 getAllCategory();
+                setName("");
             }
         } catch (error) {
             console.log(error);
@@ -45,20 +52,7 @@ const CreateCategory = () => {
         }
     };
 
-    const handleDelete = async (pid) => {
-        try {
-            const { data } = await axios.delete(
-                `/api/v1/category/delete-category/${pid}`
-            );
-            if (data.success) {
-                alert(`category deleted successfully`);
-                getAllCategory();
-            }
 
-        } catch (error) {
-            alert("ERROR in deletion : ", error);
-        }
-    }
 
     useEffect(() => {
         getAllCategory();
@@ -87,8 +81,8 @@ const CreateCategory = () => {
                                     <tr>
                                         <td key={c._id}> {c.name}</td>
 
-                                        <td><button className="btn btn-primary" onClick={handleVisibility}>Edit</button>
-                                            <button className="btn btn-danger" onClick={handleDelete(c._id)}>Delete</button></td>
+                                        <td><button className="btn " onClick={handleVisibility}>Edit</button>
+                                            <button className="btn " >Delete</button></td>
                                     </tr>
 
                                 ))

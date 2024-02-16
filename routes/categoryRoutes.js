@@ -7,7 +7,7 @@ const router = express.Router();
 
 // routes
 // create category
-router.post('/create-category', createCategoryController);
+router.post('/create-category', requireSignIn, isAdmin, createCategoryController);
 
 // update category
 router.put('/update-category/:id', requireSignIn, isAdmin, updateCategoryController);
