@@ -18,6 +18,7 @@ const CreateCategory = () => {
 
     }
 
+    // create new category
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,6 +53,31 @@ const CreateCategory = () => {
         }
     };
 
+    // delete category
+    const handleDelete = async (pid) => {
+        try {
+            const { data } = await axios.delete(
+                `/api/v1/category/delete-category/${pid}`,
+                {
+                    headers: {
+                        "Authorization": auth?.token
+                    }
+                }
+            )
+
+            if (data.success) {
+                alert("category deleted successfully");
+                getAllCategory();
+            } else {
+                alert("error in deletion of category");
+            }
+
+        } catch (error) {
+            console.log(error);
+            alert("error in deletion of category");
+        }
+    }
+
 
 
     useEffect(() => {
@@ -82,7 +108,7 @@ const CreateCategory = () => {
                                         <td key={c._id}> {c.name}</td>
 
                                         <td><button className="btn " onClick={handleVisibility}>Edit</button>
-                                            <button className="btn " >Delete</button></td>
+                                            <button className="btn " onClick={() => { handleDelete(c._id) }}>Delete</button></td>
                                     </tr>
 
                                 ))
