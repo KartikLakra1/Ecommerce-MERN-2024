@@ -4,19 +4,18 @@ import AdminMenu from "../../Components/Layout/AdminMenu";
 import axios from 'axios';
 import CategoryForm from "../../Components/Form/CategoryForm";
 import { useAuth } from "../../Context/Auth";
+import { Modal } from 'antd';
 
 
 const CreateCategory = () => {
     const [categories, setCategories] = useState([]);
     const [visible, setvisible] = useState(false);
     const [name, setName] = useState("");
-    const [auth, setAuth] = useAuth()
+    const [auth, setAuth] = useAuth();
+    const [selected, setSelected] = useState(null);
+    const [updatedName, setUpdatedName] = useState("");
 
 
-    const handleVisibility = () => {
-        setvisible(!visible);
-
-    }
 
     // create new category
     const handleSubmit = async (e) => {
@@ -84,6 +83,33 @@ const CreateCategory = () => {
         getAllCategory();
     }, [])
 
+    // update category
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        try {
+            const { data } = await axios.put(
+                `/api/v1/category/update-category/${selected._id}`, { name: updatedName },
+                {
+                    headers: {
+                        "Authorization": auth?.token
+                    }
+                }
+            )
+            if (data.success) {
+                alert(`${updatedName} is updated`);
+                setSelected(null);
+                setUpdatedName("");
+                setvisible(false);
+                getAllCategory();
+            } else {
+                alert(data.messaage);
+            }
+
+        } catch (error) {
+            alert("Something went wrong")
+        }
+    }
+
     return (
 
         <Layout>
@@ -107,7 +133,7 @@ const CreateCategory = () => {
                                     <tr>
                                         <td key={c._id}> {c.name}</td>
 
-                                        <td><button className="btn " onClick={handleVisibility}>Edit</button>
+                                        <td><button className="btn " onClick={() => { setvisible(true); setUpdatedName(c.name); setSelected(c) }}>Edit</button>
                                             <button className="btn " onClick={() => { handleDelete(c._id) }}>Delete</button></td>
                                     </tr>
 
@@ -115,6 +141,9 @@ const CreateCategory = () => {
                             }
 
                         </table>
+                        <Modal onCancel={() => setvisible(false)} footer={null} visible={visible}>
+                            <CategoryForm value={updatedName} setValue={setUpdatedName} handleSubmit={handleUpdate} />
+                        </Modal>
 
                     </div>
                 </div>
