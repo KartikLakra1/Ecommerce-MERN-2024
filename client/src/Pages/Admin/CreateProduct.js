@@ -9,10 +9,10 @@ const CreateProduct = () => {
     const [categories, setCategories] = useState([]);
     const [category, setcategory] = useState("");
     const [name, setname] = useState("");
-    const [description, setdescription] = useState("");
-    const [price, setprice] = useState("");
-    const [quantity, setquantity] = useState("");
-    const [shipping, setshipping] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [shipping, setShipping] = useState("");
     const [photo, setphoto] = useState("");
 
     //get all category
@@ -32,6 +32,21 @@ const CreateProduct = () => {
     useEffect(() => {
         getAllCategory();
     }, [])
+
+    // create product function
+    const handleCreate = async (e) => {
+        e.preventDefault();
+        try {
+            const productData = new FormData();
+
+            productData.append("name", name);
+            const { data } = await axios.post('/api/v1/product/create-product',)
+
+        } catch (error) {
+            console.log(error);
+            alert("something went wrong in creating product")
+        }
+    }
 
 
 
@@ -61,6 +76,69 @@ const CreateProduct = () => {
                                 </label>
 
                             </div>
+                            <div style={{ marginBottom: "15px" }}>
+                                {
+                                    photo && (
+                                        <div>
+                                            <img src={URL.createObjectURL(photo)} alt="product_photo" height={"200px"} />
+                                        </div>
+                                    )
+                                }
+
+                            </div>
+
+                            <div style={{ marginBottom: "15px" }}>
+                                <input type="text" value={name} placeholder="write a name" onChange={(e) => setname(e.target.value)} />
+                            </div>
+
+                            <div style={{ marginBottom: "15px" }}>
+                                <textarea
+                                    type="text"
+                                    value={description}
+                                    placeholder="write a description"
+                                    className="form-control"
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </div>
+
+                            <div style={{ marginBottom: "15px" }}>
+                                <input
+                                    type="number"
+                                    value={price}
+                                    placeholder="write a Price"
+                                    className="form-control"
+                                    onChange={(e) => setPrice(e.target.value)}
+                                />
+                            </div>
+                            <div style={{ marginBottom: "15px" }}>
+                                <input
+                                    type="number"
+                                    value={quantity}
+                                    placeholder="write a quantity"
+                                    className="form-control"
+                                    onChange={(e) => setQuantity(e.target.value)}
+                                />
+                            </div>
+                            <div style={{ marginBottom: "15px" }}>
+                                <Select
+                                    bordered={false}
+                                    placeholder="Select Shipping "
+                                    size="large"
+                                    showSearch
+                                    className="form-select mb-3"
+                                    onChange={(value) => {
+                                        setShipping(value);
+                                    }}
+                                >
+                                    <Option value="0">No</Option>
+                                    <Option value="1">Yes</Option>
+                                </Select>
+                            </div>
+
+                            <div style={{ marginBottom: "15px" }}>
+                                <button className="btn" onClick={handleCreate}>CREATE PRODUCT</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
