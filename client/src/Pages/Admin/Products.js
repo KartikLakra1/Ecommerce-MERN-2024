@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminMenu from "../../Components/Layout/AdminMenu";
 import Layout from "../../Components/Layout/Layout";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const Products = () => {
@@ -32,11 +33,14 @@ const Products = () => {
                     <h1>All Products List</h1>
                     {
                         products?.map(p => (
-                            <div key={p._id}>
-                                <img src={p.photo} alt={p.name} />
-                                <h3>{p.name}</h3>
-                                <p>{p.description}</p>
-                            </div>
+                            <Link key={p._id} s to={`/dashboard/admin/product/${p.slug}`}>
+                                <div>
+                                    <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} style={{ maxHeight: '500px', maxWidth: '500px' }} />
+                                    <h3>{p.name}</h3>
+                                    <p>{p.description}</p>
+                                </div>
+                            </Link>
+
                         ))
                     }
                 </div>
