@@ -3,9 +3,14 @@ import Layout from "../../Components/Layout/Layout";
 import AdminMenu from "../../Components/Layout/AdminMenu";
 import axios from "axios";
 import { Select } from 'antd';
+import { useAuth } from "../../Context/Auth";
+import { useNavigate } from "react-router-dom";
 const { Option } = Select;
 
+
 const CreateProduct = () => {
+    const [auth, setAuth] = useAuth()
+    const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     const [category, setcategory] = useState("");
     const [name, setname] = useState("");
@@ -38,9 +43,24 @@ const CreateProduct = () => {
         e.preventDefault();
         try {
             const productData = new FormData();
-
             productData.append("name", name);
-            const { data } = await axios.post('/api/v1/product/create-product',)
+            productData.append("description", description);
+            productData.append("price", price);
+            productData.append("quantity", quantity);
+            productData.append("photo", photo);
+            productData.append("category", category);
+            productData.append("name", name);
+            const { data } = await axios.post('/api/v1/product/create-product', productData, {
+                headers: {
+                    "Authorization": auth?.token
+                }
+            })
+            if (data?.success) {
+                alert("product created successfully");
+                navigate('/dashnoard/admin/products')
+            } else {
+                alert(data?.message)
+            }
 
         } catch (error) {
             console.log(error);
@@ -60,7 +80,7 @@ const CreateProduct = () => {
                         <div>
                             <Select bordered={false} placeholder="Select a category" style={{ marginBottom: "15px" }} size="large" showSearch onChange={(value) => { setcategory(value) }}>
                                 {categories?.map(c => (
-                                    <Option key={c._id} value={c.name}>
+                                    <Option key={c._id} value={c._id}>
                                         {c.name}
                                     </Option>
                                 ))}
