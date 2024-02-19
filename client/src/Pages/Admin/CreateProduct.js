@@ -57,7 +57,7 @@ const CreateProduct = () => {
             })
             if (data?.success) {
                 alert("product created successfully");
-                navigate('/dashnoard/admin/products')
+                navigate('/dashboard/admin/products')
             } else {
                 alert(data?.message)
             }

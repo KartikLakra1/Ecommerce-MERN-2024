@@ -4,13 +4,15 @@ import AdminMenu from "../../Components/Layout/AdminMenu";
 import axios from "axios";
 import { Select } from 'antd';
 import { useAuth } from "../../Context/Auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 const { Option } = Select;
 
 
 const UpdateProduct = () => {
     const [auth, setAuth] = useAuth()
     const navigate = useNavigate();
+    const parmas = useParams();
     const [categories, setCategories] = useState([]);
     const [category, setcategory] = useState("");
     const [name, setname] = useState("");
@@ -19,6 +21,29 @@ const UpdateProduct = () => {
     const [quantity, setQuantity] = useState("");
     const [shipping, setShipping] = useState("");
     const [photo, setphoto] = useState("");
+
+    const [id, setid] = useState();
+
+    // get single product
+    const getSingleProduct = async () => {
+        try {
+            const { data } = await axios.get(`/api/v1/product/get-product/${parmas.slug}`)
+            setname(data.product.name);
+            setid(data.product._id);
+            setDescription(data.product.description);
+            setPrice(data.product.price);
+            setQuantity(data.product.quantity);
+            setShipping(data.product.shipping)
+            setcategory(data.product.category)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getSingleProduct();
+    }, [])
+
 
     //get all category
     const getAllCategory = async () => {
@@ -47,7 +72,7 @@ const UpdateProduct = () => {
             productData.append("description", description);
             productData.append("price", price);
             productData.append("quantity", quantity);
-            productData.append("photo", photo);
+            photo && productData.append("photo", photo);
             productData.append("category", category);
             productData.append("name", name);
             const { data } = await axios.post('/api/v1/product/create-product', productData, {
@@ -76,9 +101,9 @@ const UpdateProduct = () => {
                 <AdminMenu />
                 <div className="content-container">
                     <div className="card">
-                        <h1>Create Products</h1>
+                        <h1>Update Products</h1>
                         <div>
-                            <Select bordered={false} placeholder="Select a category" style={{ marginBottom: "15px" }} size="large" showSearch onChange={(value) => { setcategory(value) }}>
+                            <Select bordered={false} placeholder="Select a category" style={{ marginBottom: "15px" }} size="large" showSearch onChange={(value) => { setcategory(value) }} value={category.name}>
                                 {categories?.map(c => (
                                     <Option key={c._id} value={c._id}>
                                         {c.name}
@@ -98,9 +123,13 @@ const UpdateProduct = () => {
                             </div>
                             <div style={{ marginBottom: "15px" }}>
                                 {
-                                    photo && (
+                                    photo ? (
                                         <div>
                                             <img src={URL.createObjectURL(photo)} alt="product_photo" height={"200px"} />
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <img src={`/api/v1/product/product-photo/${id}`} alt="product_photo" height={"200px"} />
                                         </div>
                                     )
                                 }
@@ -149,6 +178,7 @@ const UpdateProduct = () => {
                                     onChange={(value) => {
                                         setShipping(value);
                                     }}
+                                    value={shipping ? "yes" : "no"}
                                 >
                                     <Option value="0">No</Option>
                                     <Option value="1">Yes</Option>
@@ -156,7 +186,7 @@ const UpdateProduct = () => {
                             </div>
 
                             <div style={{ marginBottom: "15px" }}>
-                                <button className="btn" onClick={handleCreate}>CREATE PRODUCT</button>
+                                <button className="btn" onClick={handleCreate}>UPDATE PRODUCT</button>
                             </div>
 
                         </div>
