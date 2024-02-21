@@ -34,7 +34,7 @@ const UpdateProduct = () => {
             setPrice(data.product.price);
             setQuantity(data.product.quantity);
             setShipping(data.product.shipping)
-            setcategory(data.product.category)
+            setcategory(data.product.category._id)
         } catch (error) {
             console.log(error);
         }
@@ -64,7 +64,7 @@ const UpdateProduct = () => {
     }, [])
 
     // create product function
-    const handleCreate = async (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
         try {
             const productData = new FormData();
@@ -75,25 +75,39 @@ const UpdateProduct = () => {
             photo && productData.append("photo", photo);
             productData.append("category", category);
             productData.append("name", name);
-            const { data } = await axios.post('/api/v1/product/create-product', productData, {
+            const { data } = await axios.put(`/api/v1/product/update-product/${id}`, productData, {
                 headers: {
                     "Authorization": auth?.token
                 }
             })
             if (data?.success) {
-                alert("product created successfully");
-                navigate('/dashnoard/admin/products')
+                alert("product Updated successfully successfully");
+                navigate('/dashboard/admin/products')
             } else {
                 alert(data?.message)
             }
 
         } catch (error) {
             console.log(error);
-            alert("something went wrong in creating product")
+            alert("something went wrong in updating product")
         }
     }
 
 
+    // delete the product
+    const handleDelete = async () => {
+        try {
+            let answer = window.prompt("Are you sure you want to delete this product ? ");
+            if (!answer) return;
+
+            const { data } = await axios.delete(`/api/v1/product//delete-product/${id}`);
+            navigate('/dashboard/admin/products');
+
+        } catch (error) {
+            console.log(error);
+            alert("Something went wrong");
+        }
+    }
 
     return (
         <Layout>
@@ -103,7 +117,7 @@ const UpdateProduct = () => {
                     <div className="card">
                         <h1>Update Products</h1>
                         <div>
-                            <Select bordered={false} placeholder="Select a category" style={{ marginBottom: "15px" }} size="large" showSearch onChange={(value) => { setcategory(value) }} value={category.name}>
+                            <Select bordered={false} placeholder="Select a category" style={{ marginBottom: "15px" }} size="large" showSearch onChange={(value) => { setcategory(value) }} value={category}>
                                 {categories?.map(c => (
                                     <Option key={c._id} value={c._id}>
                                         {c.name}
@@ -186,7 +200,11 @@ const UpdateProduct = () => {
                             </div>
 
                             <div style={{ marginBottom: "15px" }}>
-                                <button className="btn" onClick={handleCreate}>UPDATE PRODUCT</button>
+                                <button className="btn" onClick={handleUpdate}>UPDATE PRODUCT</button>
+                            </div>
+
+                            <div style={{ marginBottom: "15px" }}>
+                                <button className="btn" onClick={handleDelete}>DELETE PRODUCT</button>
                             </div>
 
                         </div>
