@@ -195,3 +195,63 @@ export const updateProductController = async (req, res) => {
         })
     }
 }
+
+
+// filter controller
+export const productFilterController = async (req, res) => {
+    try {
+        const { check, radio } = req.body;
+        let args = {}
+        if (check.length > 0) args.category = check
+        if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] }
+
+        const products = await ProductModel.find(args);
+
+        res.status(201).send({
+            success: true,
+            products,
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success: false,
+            message: "Error while filtering products"
+        })
+    }
+}
+
+// count Product controller
+export const productCountController = async (req, res) => {
+    try {
+        const total = await ProductModel.find({}).estimatedDocumentCount();
+        res.status(200).send({
+            success: true,
+            total
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            success: false,
+            message: "Error in product count"
+        })
+    }
+}
+
+
+// Product list based on page
+export const productlistController = async (req, res) => {
+    try {
+        const perPage = 3
+        const page = req.params.page ? req.params.page : 1
+        const products = await ProductModel.find({}).select("-photo").skip((page - 1) * perPage).limit(perPage).sort({ createdAt: -1 });
+
+        res.status(201).send({
+            success: true,
+            products
+        })
+    } catch (error) {
+        console.log(error);
+        message: "error in per page ctrl"
+    }
+}

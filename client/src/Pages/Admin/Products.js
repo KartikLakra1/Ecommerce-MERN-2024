@@ -30,19 +30,29 @@ const Products = () => {
             <div className="adminDashboard-container">
                 <AdminMenu />
                 <div>
-                    <h1>All Products List</h1>
-                    {
-                        products?.map(p => (
-                            <Link key={p._id} s to={`/dashboard/admin/product/${p.slug}`}>
-                                <div>
-                                    <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} style={{ maxHeight: '500px', maxWidth: '500px' }} />
-                                    <h3>{p.name}</h3>
-                                    <p>{p.description}</p>
-                                </div>
-                            </Link>
+                    <h1 className="text-2xl underline font-semibold text-center">All Products List</h1>
+                    <div className="grid justify-center items-center grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
+                        {
+                            products?.map(p => (
+                                <div key={p._id} className="grid items-center justify-center">
+                                    <Link to={`/dashboard/admin/product/${p.slug}`} className="items-center justify-center grid">
+                                        <div className="shadow-xl border-black hover:shadow-sm p-2 grid text-center max-w-72 h-fit">
+                                            <div className="flex items-center justify-center p-3">
+                                                <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} className="flex justify-center items-center w-48 h-auto text-center" />
+                                            </div>
 
-                        ))
-                    }
+                                            <h3 className="p-2 text-red-800">{p.name}</h3>
+                                            <p>{p.description}</p>
+
+                                        </div>
+                                    </Link>
+                                </div>
+
+                            ))
+                        }
+
+                    </div>
+
                 </div>
             </div>
 

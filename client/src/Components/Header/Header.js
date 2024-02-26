@@ -39,7 +39,7 @@ const Header = () => {
 
 
     return (
-        <div className="navigation-main">
+        <div className="navigation-main z-40">
 
             <div className={toggle ? "main-header toggle-true" : "main-header"}>
 
