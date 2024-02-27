@@ -11,6 +11,7 @@ import { CgProfile } from "react-icons/cg";
 import { useAuth } from "../../Context/Auth";
 import SearchInput from "../Form/SearchInput";
 import useCategory from './../../Hooks/useCategory';
+import { useCart } from "../../Context/Cart";
 
 
 const Header = () => {
@@ -20,6 +21,7 @@ const Header = () => {
     const [toggle, setToggle] = useState(false);
     const [auth, setAuth] = useAuth();
     const categories = useCategory();
+    const [cart] = useCart();
 
     const handleClick = () => {
         setClick(!click);
@@ -88,10 +90,11 @@ const Header = () => {
 
 
                 <ul className="cartAndProfile-list">
-                    <li><NavLink className="link-color-toggle" to={"/cart"}>
+                    <li className="relative"><NavLink className="link-color-toggle" to={"/cart"}>
                         <CiShoppingCart size={30} />
                     </NavLink>
-                        {0}</li>
+                        {cart?.length > 0 ? <div className="bg-yellow-300 text-black p-1 rounded-3xl absolute bottom-4 pl-1 pr-1 right-0 font-bold">{cart.length}</div> : <></>}
+                    </li>
 
 
                     <li>

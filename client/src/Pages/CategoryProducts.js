@@ -38,7 +38,7 @@ const CategoryProducts = () => {
                             <div key={p._id} className="grid items-center justify-center">
                                 <div className="shadow-xl border-black hover:shadow-sm p-2 grid text-center max-w-72 h-fit">
                                     <div className="flex items-center justify-center p-3">
-                                        <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} className="flex justify-center items-center w-48 h-auto text-center" />
+                                        <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} className="flex justify-center items-center w-96 h-auto text-center" />
                                     </div>
 
                                     <h3 className="p-2 text-red-800">{p.name}</h3>

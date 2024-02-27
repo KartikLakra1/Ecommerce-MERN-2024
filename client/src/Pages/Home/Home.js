@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Checkbox, Radio } from 'antd';
 import { Prices } from "../../Components/Prices";
 import { useNavigate } from "react-router-dom";
+import { useCart } from '../../Context/Cart';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -14,6 +15,7 @@ const Home = () => {
     const [page, setPage] = useState(1);
     const [laoding, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [cart, setCart] = useCart()
 
     useEffect(() => {
         if (page == 1) return;
@@ -158,14 +160,18 @@ const Home = () => {
                                 <div key={p._id} className="grid items-center justify-center">
                                     <div className="shadow-xl border-black hover:shadow-sm p-2 grid text-center max-w-72 h-fit">
                                         <div className="flex items-center justify-center p-3">
-                                            <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} className="flex justify-center items-center w-48 h-auto text-center" />
+                                            <img src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} className="flex justify-center items-center w-96 h-auto text-center" />
                                         </div>
 
                                         <h3 className="p-2 text-red-800">{p.name}</h3>
-                                        <p>{p.description.substring(0.30)}</p>
+                                        <p>{p.description.substring(0, 30)}...</p>
                                         <p className="font-bold text-left pl-4">$ {p.price}</p>
                                         <button className="bg-slate-600 text-white p-2 my-1 font-semibold" onClick={() => navigate(`/product/${p.slug}`)}>More Details</button>
-                                        <button className="bg-orange-700 text-yellow-100 p-2 ">Add to Cart</button>
+                                        <button className="bg-orange-700 text-yellow-100 p-2" onClick={() => {
+                                            setCart([...cart, p]);
+                                            localStorage.setItem('cart', JSON.stringify([...cart, p]))
+                                            alert("item added to cart successfully");
+                                        }}>Add to Cart</button>
 
                                     </div>
 

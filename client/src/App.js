@@ -23,6 +23,7 @@ import Search from './Pages/Search.js';
 import ProductDetails from './Pages/ProductDetails.js';
 import Categories from './Pages/Categories.js';
 import CategoryProducts from './Pages/CategoryProducts.js';
+import CartPage from './Pages/CartPage.js';
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        <Route path="/cart" element={<CartPage />} />
 
 
         <Route path='/dashboard' element={<PrivateRoute />}>
