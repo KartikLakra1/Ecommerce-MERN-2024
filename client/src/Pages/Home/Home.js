@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css"
 import Layout from './../../Components/Layout/Layout';
 import axios from 'axios';
 import { Button, Checkbox, Radio } from 'antd';
 import { Prices } from "../../Components/Prices";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -13,6 +13,7 @@ const Home = () => {
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [laoding, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (page == 1) return;
@@ -163,7 +164,7 @@ const Home = () => {
                                         <h3 className="p-2 text-red-800">{p.name}</h3>
                                         <p>{p.description.substring(0.30)}</p>
                                         <p className="font-bold text-left pl-4">$ {p.price}</p>
-                                        <button className="bg-slate-600 text-white p-2 my-1 font-semibold">More Details</button>
+                                        <button className="bg-slate-600 text-white p-2 my-1 font-semibold" onClick={() => navigate(`/product/${p.slug}`)}>More Details</button>
                                         <button className="bg-orange-700 text-yellow-100 p-2 ">Add to Cart</button>
 
                                     </div>

@@ -19,12 +19,20 @@ import Orders from './Pages/user/Orders.js';
 import Profile from './Pages/user/Profile.js';
 import Products from './Pages/Admin/Products.js';
 import UpdateProduct from './Pages/Admin/UpdateProduct.js';
+import Search from './Pages/Search.js';
+import ProductDetails from './Pages/ProductDetails.js';
+import Categories from './Pages/Categories.js';
+import CategoryProducts from './Pages/CategoryProducts.js';
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/category/:slug" element={<CategoryProducts />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/about" element={<Aboutpage />} />
         <Route path="/contact" element={<Contactpage />} />
         <Route path="/policy" element={<Policies />} />

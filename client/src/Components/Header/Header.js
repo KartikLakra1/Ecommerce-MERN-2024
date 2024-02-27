@@ -9,6 +9,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useAuth } from "../../Context/Auth";
+import SearchInput from "../Form/SearchInput";
+import useCategory from './../../Hooks/useCategory';
 
 
 const Header = () => {
@@ -17,6 +19,7 @@ const Header = () => {
     const [profile, setProfile] = useState(false);
     const [toggle, setToggle] = useState(false);
     const [auth, setAuth] = useAuth();
+    const categories = useCategory();
 
     const handleClick = () => {
         setClick(!click);
@@ -51,12 +54,13 @@ const Header = () => {
 
 
                 <ul className="navlink-list">
+                    <SearchInput />
                     <li><NavLink className="link-color-toggle" to={"/"}>HOME</NavLink></li>
 
 
                     <li>
-                        <div>
-                            <NavLink className="link-color-toggle" to={"/category"}>CATEGORY</NavLink>
+                        <div className="flex">
+                            <NavLink className="link-color-toggle" to={"/categories"}>CATEGORY</NavLink>
 
                             <span style={{ cursor: 'pointer' }} onClick={handleClick}>
                                 {
@@ -67,15 +71,18 @@ const Header = () => {
 
                         </div>
                         <div className={click ? ("header-category-navbar") : ("hidden-content")}>
-                            <p className="header-profile-navbar-item">PRODUCT 1</p>
-                            <p className="header-profile-navbar-item">PRODUCT 2</p>
-                            <p className="header-profile-navbar-item">PRODUCT 3</p>
+                            {
+                                categories.map(c => (
+                                    <p className="header-profile-navbar-item" ><Link className="text-white" to={`/category/${c.slug}`}>{c.name}</Link></p>
+                                ))
+                            }
+
 
                         </div>
                     </li>
 
 
-                    <li><NavLink className="link-color-toggle" to={"/about"}>ABOUT</NavLink></li>
+
 
                 </ul>
 
