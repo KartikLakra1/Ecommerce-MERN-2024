@@ -160,3 +160,41 @@ export const testController = async (req, res) => {
         message: "Inside protected route"
     })
 }
+
+
+// update User
+export const updateProfileController = async (req, res) => {
+    try {
+        const { name, email, password, address, phone } = req.body;
+        const user = await userModel.findById(req.user._id);
+
+        // password
+        if (password && password.length < 6) {
+            return res.json({ error: "Password is required and 6 character long" })
+        }
+
+        const hashed = password ? await hashPassword(password) : undefined
+
+        const updatedUser = await userModel.findByIdAndUpdate(req.user._id, {
+            name: name || user.name,
+            password: hashed || user.password,
+            phone: phone || user.phone,
+            address: address || user.address,
+
+        }, { new: true })
+
+
+        res.status(201).send({
+            success: true,
+            message: "user updated successfully",
+            updatedUser,
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            success: false,
+            message: "Error while updating user",
+        })
+    }
+}

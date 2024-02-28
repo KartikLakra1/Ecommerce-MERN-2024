@@ -1,15 +1,135 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserMenu from "../../Components/Layout/UserMenu";
 import Layout from "../../Components/Layout/Layout";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import axios from "axios";
+import { useAuth } from "../../Context/Auth";
+
 
 const Profile = () => {
+    const [auth, setAuth] = useAuth();
+    const [pass, setPass] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
+
+    const handlePassword = () => {
+        setPass(!pass);
+    }
+
+
+
+    // get user data
+    useEffect(() => {
+        const { email, phone, address, name } = auth.user
+        setName(name);
+        setPhone(phone);
+        setAddress(address);
+        setEmail(email)
+    }, [])
+
+
+    // form function
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const { data } = await axios.put("/api/v1/auth/profile", {
+                name, email, password, phone, address,
+            }, {
+                headers: {
+                    "Authorization": auth?.token
+                }
+            });
+            if (data?.error) {
+                alert(data.error);
+
+            } else {
+                setAuth({ ...auth, user: data?.updatedUser })
+                let ls = localStorage.getItem('auth');
+                ls = JSON.parse(ls);
+                ls.user = data.updatedUser
+                localStorage.setItem('auth', JSON.stringify(ls));
+
+                alert("Profile updated succcessfully");
+            }
+
+        } catch (error) {
+            console.log(error);
+            alert("something went wrong")
+        }
+    }
+
+
     return (
         <Layout>
             <div className="adminDashboard-container">
                 <UserMenu />
                 <div className="content-container">
                     <div className="card">
-                        <h1>Profile</h1>
+                        <div className="register-main">
+                            <div className="register-main-content">
+                                <h1>PROFILE FORM</h1>
+                                <form className="regsiter-main-content-form" onSubmit={handleSubmit}>
+                                    <div className="register-main-form-content">
+                                        <label>Name</label>
+                                        <input type="text" className="register-input" value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="register-main-form-content">
+                                        <label>Email</label>
+                                        <input type="email" className="register-input" value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+
+                                            disabled />
+                                    </div>
+
+                                    <div className="register-main-form-content">
+                                        <label>Password</label>
+                                        <div className="password-div">
+                                            <input type={pass ? "text" : "password"} className="register-input password-input" value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                            <span onClick={handlePassword}>
+                                                {
+                                                    pass ? (
+                                                        <FaEye size={25} />
+                                                    ) : (
+                                                        <FaEyeSlash size={25} />
+                                                    )
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="register-main-form-content">
+                                        <label>Phone</label>
+                                        <input type="text" className="register-input" value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="register-main-form-content">
+                                        <label>Address</label>
+
+                                        <input type="text" className="register-input" value={address}
+                                            onChange={(e) => setAddress(e.target.value)}
+                                        />
+
+
+                                    </div>
+                                    <div className="register-main-form-content">
+                                        <button type="submit" className="btn">
+                                            Update
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
