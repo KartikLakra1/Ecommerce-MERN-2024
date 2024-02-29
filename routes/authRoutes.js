@@ -1,5 +1,5 @@
 import express from "express";
-import { loginController, registerController, testController, forgotpasswordController, updateProfileController } from "../controllers/authController.js"
+import { loginController, registerController, testController, forgotpasswordController, updateProfileController, getallusersContoller, deleteUserController } from "../controllers/authController.js"
 import { isAdmin, requireSignIn } from "../MiddleWare/authMiddleware.js";
 
 // router Object
@@ -29,6 +29,12 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
 
 // update User
 router.put('/profile', requireSignIn, updateProfileController);
+
+// get all user
+router.get('/getall-users', requireSignIn, isAdmin, getallusersContoller);
+
+//delete user
+router.delete('/delete-user/:id', requireSignIn, isAdmin, deleteUserController);
 
 
 

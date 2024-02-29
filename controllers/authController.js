@@ -198,3 +198,50 @@ export const updateProfileController = async (req, res) => {
         })
     }
 }
+
+
+// get all users controller
+export const getallusersContoller = async (req, res) => {
+    try {
+        const Allusers = await userModel.find({});
+
+        res.status(201).send({
+            success: true,
+            message: "All users fetched successfully",
+            Allusers,
+            totalCount: Allusers.length,
+
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            success: false,
+            message: "Error while getting all users",
+        })
+    }
+}
+
+
+// delete user
+export const deleteUserController = async (req, res) => {
+    try {
+        const { id } = req.params
+        const category = await userModel.findByIdAndDelete(id);
+
+        res.status(201).send({
+            success: true,
+            message: "delete user controller",
+            category
+
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(401).send({
+            success: false,
+            error,
+            message: "Error while deleting category "
+        })
+    }
+}
