@@ -4,6 +4,7 @@ import { useCart } from "../Context/Cart";
 import { useAuth } from "../Context/Auth";
 import { useNavigate } from "react-router-dom";
 
+
 const CartPage = () => {
     const navigate = useNavigate()
     const [cart, setCart] = useCart();
@@ -72,6 +73,28 @@ const CartPage = () => {
                         <h3 className="text-center text-xl font-semibold pb-3">Total | Checkout | Payment</h3>
                         <hr></hr>
                         <h1 className="text-center text-xl mt-2 font-mono font-bold">Total : {totalPrice()}</h1>
+                        {
+                            auth?.user?.address ? (
+                                <div className="flex items-center justify-center flex-col mt-2 mb-2
+                                ">
+                                    <h4>Current Address </h4>
+                                    <h5>{auth?.user?.address}</h5>
+                                    <button className="bg-yellow-500 p-2 font-bold rounded-lg hover:bg-yellow-400" onClick={() => navigate("/dashboard/user/profile")}>Update Address</button>
+                                </div>
+
+                            ) : (
+                                <div className="flex items-center justify-center flex-col mt-2 mb-2
+                                ">
+                                    {auth?.token ? (
+                                        <button className="bg-yellow-500 p-2 font-bold rounded-lg hover:bg-yellow-400" onClick={() => navigate("/dashboard/user/profile")}>Update Address</button>
+                                    ) : (
+                                        <button className="bg-yellow-500 p-2 font-bold rounded-lg hover:bg-yellow-400" onClick={() => navigate("/login", { state: '/cart' })}>Please Login to checkout</button>
+                                    )
+                                    }
+
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
