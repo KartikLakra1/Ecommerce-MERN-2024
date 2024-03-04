@@ -49,23 +49,27 @@ const Login = () => {
     return (
         <Layout>
             <div className="register-main">
-                <div className="register-main-content" onSubmit={handleSubmit}>
-                    <h1>LOGIN FORM</h1>
-                    <form className="regsiter-main-content-form">
+                <div className="bg-slate-600 text-white p-4 flex flex-col items-center justify-center shadow-slate-600 shadow-2xl w-[90%] lg:w-[40%] gap-2" onSubmit={handleSubmit}>
+                    <h1 className="text-3xl font-bold bg-slate-200 text-black p-3 w-[80%] lg:w-[50%] text-center">LOGIN FORM</h1>
+                    <form className="flex flex-col items-center justify-center gap-3 lg:w-[50%] w-[70%]">
 
-                        <div className="register-main-form-content">
-                            <label>Email</label>
-                            <input type="text" className="register-input"
+                        <div className="flex flex-col items-start justify-start gap-2 w-[90%]">
+                            <label className="text-xl font-bold w-full">Email</label>
+                            <input type="text" className="flex justify-start text-start p-2  text-black w-full"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)} />
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="enter your email" />
+
                         </div>
 
-                        <div className="register-main-form-content">
-                            <label>Password</label>
-                            <div className="password-div">
-                                <input type={pass ? "text" : "password"} className="register-input password-input"
+                        <div className="flex flex-col items-start justify-start gap-2 w-[90%]">
+                            <label className="text-xl font-bold w-full">Password</label>
+                            <div className="flex items-center justify-center w-[100%]">
+                                <input type={pass ? "text" : "password"} className="register-input password-input text-black w-[90%] p-2"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)} />
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="enter your password"
+                                />
                                 <span onClick={handlePassword}>
                                     {
                                         pass ? (
@@ -78,12 +82,12 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <div className="register-main-form-content">
-                            <button type="submit" className="btn">
+                        <div className="flex items-center justify-center flex-col mt-3 w-[50%]">
+                            <button type="submit" className="bg-blue-950 text-white p-2 font-bold text-xl hover:bg-blue-600 duration-300 w-full">
                                 Submit
                             </button>
 
-                            <button type="button" className="btn" onClick={() => { navigate('/forgot-password') }}>
+                            <button type="button" className="bg-red-500 text-white hover:bg-red-800 text-lg font-semibold duration-700 w-full mt-2" onClick={() => { navigate('/forgot-password') }}>
                                 Forgot Password
                             </button>
                         </div>
@@ -91,7 +95,7 @@ const Login = () => {
 
                     </form>
 
-                    <h3>If not already registered ! <Link to={"/register"}>Register</Link></h3>
+                    <h3 className="mt-4">If not already registered ! <Link to={"/register"} className="text-red-100">Register</Link></h3>
                 </div>
             </div>
         </Layout>
