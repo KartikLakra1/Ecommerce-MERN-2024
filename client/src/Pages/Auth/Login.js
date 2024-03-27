@@ -49,8 +49,8 @@ const Login = () => {
     return (
         <Layout>
             <div className="register-main">
-                <div className="bg-slate-600 text-white p-4 flex flex-col items-center justify-center shadow-slate-600 shadow-2xl w-[90%] lg:w-[40%] gap-2" onSubmit={handleSubmit}>
-                    <h1 className="text-3xl font-bold bg-slate-200 text-black p-3 w-[80%] lg:w-[50%] text-center">LOGIN FORM</h1>
+                <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 flex flex-col items-center justify-center shadow-slate-600 shadow-2xl w-[90%] lg:w-[40%] gap-2" onSubmit={handleSubmit}>
+                    <h1 className="text-3xl font-bold bg-slate-200 text-black p-3 w-[80%] lg:w-[50%] text-center rounded-2xl">LOGIN FORM</h1>
                     <form className="flex flex-col items-center justify-center gap-3 lg:w-[50%] w-[70%]">
 
                         <div className="flex flex-col items-start justify-start gap-2 w-[90%]">
@@ -65,12 +65,12 @@ const Login = () => {
                         <div className="flex flex-col items-start justify-start gap-2 w-[90%]">
                             <label className="text-xl font-bold w-full">Password</label>
                             <div className="flex items-center justify-center w-[100%]">
-                                <input type={pass ? "text" : "password"} className="register-input password-input text-black w-[90%] p-2"
+                                <input type={pass ? "text" : "password"} className="register-input password-input text-black w-[90%] p-2 text-black"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="enter your password"
                                 />
-                                <span onClick={handlePassword}>
+                                <span onClick={handlePassword} className="bg-black p-1 pt-1 pb-1">
                                     {
                                         pass ? (
                                             <FaEye size={25} />

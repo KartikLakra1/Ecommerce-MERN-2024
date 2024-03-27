@@ -70,18 +70,18 @@ const Profile = () => {
                 <div className="content-container">
                     <div className="card">
                         <div className="register-main">
-                            <div className="register-main-content">
+                            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 flex flex-col items-center justify-center shadow-slate-600 shadow-2xl w-[90%] lg:w-[40%] gap-2">
                                 <h1>PROFILE FORM</h1>
                                 <form className="regsiter-main-content-form" onSubmit={handleSubmit}>
                                     <div className="register-main-form-content">
                                         <label>Name</label>
-                                        <input type="text" className="register-input" value={name}
+                                        <input type="text" className="register-input text-black" value={name}
                                             onChange={(e) => setName(e.target.value)}
                                         />
                                     </div>
                                     <div className="register-main-form-content">
                                         <label>Email</label>
-                                        <input type="email" className="register-input" value={email}
+                                        <input type="email" className="register-input  text-black" value={email}
                                             onChange={(e) => setEmail(e.target.value)}
 
                                             disabled />
@@ -90,7 +90,7 @@ const Profile = () => {
                                     <div className="register-main-form-content">
                                         <label>Password</label>
                                         <div className="password-div">
-                                            <input type={pass ? "text" : "password"} className="register-input password-input" value={password}
+                                            <input type={pass ? "text" : "password"} className=" text-black  register-input password-input" value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                             />
                                             <span onClick={handlePassword}>
@@ -107,7 +107,7 @@ const Profile = () => {
 
                                     <div className="register-main-form-content">
                                         <label>Phone</label>
-                                        <input type="text" className="register-input" value={phone}
+                                        <input type="text" className="register-input  text-black" value={phone}
                                             onChange={(e) => setPhone(e.target.value)}
                                         />
                                     </div>
@@ -115,14 +115,14 @@ const Profile = () => {
                                     <div className="register-main-form-content">
                                         <label>Address</label>
 
-                                        <input type="text" className="register-input" value={address}
+                                        <input type="text" className="register-input  text-black" value={address}
                                             onChange={(e) => setAddress(e.target.value)}
                                         />
 
 
                                     </div>
                                     <div className="register-main-form-content">
-                                        <button type="submit" className="btn">
+                                        <button type="submit" className="bg-blue-950 text-white p-2 font-bold text-xl hover:bg-blue-600 duration-300 w-full">
                                             Update
                                         </button>
                                     </div>
