@@ -50,8 +50,8 @@ const Header = () => {
 
 
                 <div className="header-logo">
-                    <IoLogoIonitron className="icon-Logo" size={50} />
-                    <h1><NavLink className="link-color-toggle" to={"/"}>Dante</NavLink></h1>
+                    <IoLogoIonitron className="icon-Logo" size={10} />
+                    <h1><NavLink className="link-color-toggle lg:text-5xl md:text-3xl text-4xl w-fit font-bold" to={"/"}>SHOPPERS</NavLink></h1>
                 </div>
 
 
@@ -138,8 +138,6 @@ const Header = () => {
 
                                     )
                             }
-
-                            <p className="header-profile-navbar-item">New Products</p>
                         </div>
                     </li>
                 </ul>

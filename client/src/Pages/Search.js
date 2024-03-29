@@ -2,9 +2,12 @@
 import React from "react";
 import { useSearch } from "../Context/Search";
 import Layout from './../Components/Layout/Layout';
+import { useCart } from "../Context/Cart";
 
 const Search = () => {
     const [values, setValues] = useSearch();
+    const [cart, setCart] = useCart();
+
     return (
         <Layout>
             <div className="flex flex-col items-center justify-center">
@@ -25,7 +28,11 @@ const Search = () => {
                                     <p>{p.description.substring(0.30)}</p>
                                     <p className="font-bold text-left pl-4">$ {p.price}</p>
                                     <button className="bg-slate-600 text-white p-2 my-1 font-semibold">More Details</button>
-                                    <button className="bg-orange-700 text-yellow-100 p-2 ">Add to Cart</button>
+                                    <button className="bg-orange-700 text-yellow-100 p-2" onClick={() => {
+                                        setCart([...cart, p]);
+                                        localStorage.setItem('cart', JSON.stringify([...cart, p]))
+                                        alert("item added to cart successfully");
+                                    }}>Add to Cart</button>
 
                                 </div>
 

@@ -3,12 +3,14 @@ import Layout from "../Components/Layout/Layout";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Context/Cart";
 
 const ProductDetails = () => {
     const params = useParams();
     const [product, setProduct] = useState({});
     const [relatedProducts, setRelatedProduct] = useState([]);
     const navigate = useNavigate();
+    const [cart, setCart] = useCart()
 
     useEffect(() => {
         if (params?.slug) getProduct();
@@ -44,6 +46,7 @@ const ProductDetails = () => {
                     <div className=" lg:basis-[50%] h-full p-2">
                         <img src={`/api/v1/product/product-photo/${product._id}`} alt={product.name} className="flex justify-center items-center h-full w-auto text-center" /></div>
                     <div className="lg:basis-[50%] flex flex-col items-start justify-start pl-4 pr-4 h-full pt-16">
+
                         <div className="w-full flex flex-col items-start justify-center bg-slate-300 p-2">
                             <h1 className="text-3xl font-bold mb-8">Product Details</h1>
                             <h4><span className="text-red-500 font-2xl">Name : </span>{product.name}</h4>
@@ -53,9 +56,7 @@ const ProductDetails = () => {
 
 
                         </div>
-                        <div className="mt-12">
-                            <button className="bg-orange-700 text-yellow-100 p-2 ">Add to Cart</button>
-                        </div>
+
 
 
                     </div>
@@ -63,7 +64,7 @@ const ProductDetails = () => {
                 <hr />
                 <div className="text-center">
                     <h1 className="text-3xl underline font-bold text-white ">Similar Products</h1>
-                    {relatedProducts.length < 1 && (<p>No Similar Products Found</p>)}
+                    {relatedProducts.length < 1 && (<p className="text-red-500 text-xl">No Similar Products Found</p>)}
                     <div className="grid justify-around items-center grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">
                         {
                             relatedProducts?.map(p => (
@@ -77,7 +78,11 @@ const ProductDetails = () => {
                                         <p>{p.description.substring(0.30)}</p>
                                         <p className="font-bold text-left pl-4">$ {p.price}</p>
                                         <button className="bg-slate-600 text-white p-2 my-1 font-semibold" onClick={() => navigate(`/product/${p.slug}`)}>More Details</button>
-                                        <button className="bg-orange-700 text-yellow-100 p-2 ">Add to Cart</button>
+                                        <button className="bg-orange-700 text-yellow-100 p-2" onClick={() => {
+                                            setCart([...cart, p]);
+                                            localStorage.setItem('cart', JSON.stringify([...cart, p]))
+                                            alert("item added to cart successfully");
+                                        }}>Add to Cart</button>
 
                                     </div>
 

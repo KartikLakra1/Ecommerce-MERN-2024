@@ -65,7 +65,7 @@ const Login = () => {
                         <div className="flex flex-col items-start justify-start gap-2 w-[90%]">
                             <label className="text-xl font-bold w-full">Password</label>
                             <div className="flex items-center justify-center w-[100%]">
-                                <input type={pass ? "text" : "password"} className="register-input password-input text-black w-[90%] p-2 text-black"
+                                <input type={pass ? "text" : "password"} className="register-input password-input text-black w-[90%] p-2 "
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="enter your password"

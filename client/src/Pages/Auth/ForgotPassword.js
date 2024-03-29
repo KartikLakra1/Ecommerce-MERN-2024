@@ -26,13 +26,11 @@ const ForgotPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("/api/v1/auth/forgot-password", {
-                email, newPassword, answer
+            const response = await axios.post("http://localhost:8080/api/v1/auth/forgot-password", {
+                email, answer, newPassword
             });
             if (response.data.success) {
                 alert(response.data.message);
-
-
                 navigate("/login")
             } else {
                 alert(response.data.message)
@@ -40,7 +38,7 @@ const ForgotPassword = () => {
 
         } catch (error) {
             console.log(error);
-            alert("something went wrong")
+            alert("something went wrong don't know why")
         }
     }
 
