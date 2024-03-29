@@ -9,6 +9,13 @@ import authRoutes from './routes/authRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import cors from 'cors'
 import path from 'path'
+import { fileURLToPath } from 'url';
+
+// Connection to server
+connectToDb();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // rest Object
 const app = express();
@@ -20,8 +27,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, './client/build')))
 
 
-// Connection to server
-connectToDb();
+
 
 // routes
 app.use("/api/v1/auth", authRoutes);
