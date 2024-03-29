@@ -8,6 +8,7 @@ import categoryRoutes from './routes/categoryRoutes.js';
 import authRoutes from './routes/authRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import cors from 'cors'
+import path from 'path'
 
 // rest Object
 const app = express();
@@ -16,6 +17,7 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, './client/build')))
 
 
 // Connection to server
@@ -28,10 +30,8 @@ app.use("/api/v1/product", productRoutes);
 
 
 // rest api
-app.get("/", (req, res) => {
-    res.status(201).send({
-        message: "Welcome to ecommerce app",
-    })
+app.use('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
 // PORT
