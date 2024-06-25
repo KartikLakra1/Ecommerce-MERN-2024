@@ -1,7 +1,9 @@
 .main-footer{
     width: 100%;
     min-height: 10vh;
-    background-image: linear-gradient(to right , #232121 , #342f2f , #322626);
+    /* background-image: linear-gradient(to right , #232121 , #342f2f , #322626);
+     */
+     background-color: black;
     color: #fff;
     display: flex;
     align-items: center;

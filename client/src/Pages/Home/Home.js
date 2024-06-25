@@ -120,24 +120,24 @@ const Home = () => {
 
     return (
         <Layout>
-            <div className="w-[100%] h-fit pt-4 pb-2  bg-gradient-to-tr from-slate-950 to-slate-900">
+            <div className="w-[100%] h-fit pt-4 pb-2  bg-neutral-950">
 
                 <div className="w-full">
                     <img src={"/images/banner.png"} className="bg-cover bg-center w-full" />
                 </div>
 
-                <div className="flex mt-3 p-6 w-[100%]">
+                <div className="flex mt-3 p-6 w-[100%] text-white">
 
 
 
-                    <div className="basis-[30%] mr-4 text-white">
+                    <div className="basis-[20%] mr-4 text-white">
                         <div>
                             <h4 className="text-center">Filter By Category</h4>
-                            <div className="flex items-start justify-start flex-col p-3 bg-slate-300 gap-3">
+                            <div className="flex items-start justify-start flex-col p-3 bg-slate-500 gap-3 font-bold text-white">
                                 {
                                     categories?.map(c => (
                                         <Checkbox key={c._id} onChange={(e) => handleFilter(e.target.checked, c._id)}>
-                                            {c.name}
+                                            <span className="text-white">{c.name}</span>
 
                                         </Checkbox>
                                     ))
@@ -147,12 +147,14 @@ const Home = () => {
 
                         <div className="mt-4">
                             <h4 className="text-center">Filter By Price</h4>
-                            <div className="flex items-start justify-start flex-col p-3 bg-slate-300 gap-3">
+                            <div className="flex items-start justify-start flex-col p-3 bg-slate-500 gap-3 text-white">
                                 <Radio.Group onChange={e => setRadio(e.target.value)}>
                                     {
                                         Prices?.map(p => (
                                             <div key={p._id} className="mt-1">
-                                                <Radio value={p.array}>{p.name}</Radio>
+                                                <Radio value={p.array}>
+                                                    <span className="text-white font-bold">{p.name}</span>
+                                                </Radio>
                                             </div>
 
                                         ))
@@ -166,9 +168,9 @@ const Home = () => {
                         </div>
 
                     </div>
-                    <div className="basis-[60%]">
-                        <h1 className="text-center w-full">All Products</h1>
-                        <div className="grid justify-around items-center grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3" >
+                    <div className="basis-[80%] text-black ">
+                        <h1 className="text-center w-full lg:text-4xl ">All Products</h1>
+                        <div className="grid justify-center items-center grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-2 lg:p-4" >
                             {
                                 products?.map(p => (
                                     <div key={p._id} className="grid items-center justify-center ">

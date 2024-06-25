@@ -135,8 +135,8 @@ export const forgotpasswordController = async (req, res) => {
             })
         }
 
-        const hashed = await hashPassword(newPassword);
-        await userModel.findByIdAndUpdate(user._id, { password: hashed });
+        const updatePassword = await hashPassword(newPassword);
+        await userModel.findByIdAndUpdate(user._id, { password: updatePassword });
         res.status(201).send({
             success: true,
             message: "Password reset successfully"
@@ -173,11 +173,11 @@ export const updateProfileController = async (req, res) => {
             return res.json({ error: "Password is required and 6 character long" })
         }
 
-        const hashed = password ? await hashPassword(password) : undefined
+        const updatedPassword = password ? await hashPassword(password) : undefined
 
         const updatedUser = await userModel.findByIdAndUpdate(req.user._id, {
             name: name || user.name,
-            password: hashed || user.password,
+            password: updatedPassword || user.password,
             phone: phone || user.phone,
             address: address || user.address,
 
