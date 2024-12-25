@@ -51,7 +51,7 @@ const Header = () => {
 
                 <div className="header-logo">
                     <IoLogoIonitron className="icon-Logo" size={10} />
-                    <h1><NavLink className="link-color-toggle lg:text-5xl md:text-3xl text-4xl w-fit font-bold" to={"/"}>SHOPPERS</NavLink></h1>
+                    <h1><NavLink className="link-color-toggle lg:text-4xl md:text-3xl text-4xl w-fit font-bold" to={"/"}>LOGO</NavLink></h1>
                 </div>
 
 
@@ -72,15 +72,7 @@ const Header = () => {
                             </span>
 
                         </div>
-                        <div className={click ? ("header-category-navbar") : ("hidden-content")}>
-                            {
-                                categories.map(c => (
-                                    <p className="header-profile-navbar-item" ><Link className="text-white" to={`/category/${c.slug}`}>{c.name}</Link></p>
-                                ))
-                            }
-
-
-                        </div>
+                         
                     </li>
 
 
