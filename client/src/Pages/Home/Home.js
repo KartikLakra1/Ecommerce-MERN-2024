@@ -122,9 +122,9 @@ const Home = () => {
         <Layout>
             <div className="w-[100%] h-fit pt-4 pb-2  bg-neutral-950">
 
-                <div className="w-full">
+                {/* <div className="w-full">
                     <img src={"/images/banner.png"} className="bg-cover bg-center w-full" />
-                </div>
+                </div> */}
 
                 <div className="flex mt-3 p-6 w-[100%] text-white">
 
